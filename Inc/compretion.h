@@ -3,5 +3,7 @@
 
 	#include <stdint.h>
 	#include <stdio.h>
+	#include "main.h"
 
+	void occurence (uint8_t* chaine, uint32_t tab[NBR_CARACTERE]);
 #endif
