@@ -32,6 +32,7 @@ void occurence (uint8_t* chaine, uint32_t tab[NBR_CARACTERE])
 	}
 }
 
+
 /**
  * @brief fonction permetant d'initialiser l'arbre de huffman
  *
@@ -54,5 +55,21 @@ void creeFeuille(struct noeud* arbre[NBR_CARACTERE], uint32_t tab[NBR_CARACTERE]
 			arbre[NbrFeuille]->gauche = NULL;
 			NbrFeuille++;
 		}
+	}
+}
+
+
+/**
+ * @breaf afficheTabArbreHuffman permet d'afficher la totaliter de l'arbre de huffman
+ *
+ * @param arbre pointeur vers l'arbre de huffman
+ */
+void afficheTabArbreHuffman(struct noeud* arbre[NBR_CARACTERE])
+{
+	for(uint32_t i = 0 ; i < NbrFeuille ; i++)
+	{
+		printf("feuille %u :\n\r", i);
+		printf("\t c = %c \n \r", arbre[i]->c);
+		printf("\t occurence = %u \n \r", arbre[i]->occurence);
 	}
 }

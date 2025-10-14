@@ -1,2 +1,3 @@
 ../Src/compretion.c:12:6:occurence	24	static
-../Src/compretion.c:42:6:creeFeuille	32	static
+../Src/compretion.c:43:6:creeFeuille	32	static
+../Src/compretion.c:67:6:afficheTabArbreHuffman	24	static

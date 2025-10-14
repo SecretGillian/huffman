@@ -33,7 +33,7 @@ int main(void)
 	{
 		if(tabCaractere[i])
 		{
-			printf("%c : %u \n\r", i, tabCaractere[i]);
+			printf("%c = %u \n\r", i, tabCaractere[i]);
 		}
 	}
 
@@ -41,10 +41,7 @@ int main(void)
 	creeFeuille(arbreHffman, tabCaractere);
 	printf("end creeFeuille\n\r");
 
-	for(uint32_t i = 0 ; i < NbrFeuille ; i++)
-	{
-		printf("feuille %u = %c : %u\n\r", i, arbreHffman[i]->c, arbreHffman[i]->occurence);
-	}
+	afficheTabArbreHuffman(arbreHffman);
 
 	while(1);
 
