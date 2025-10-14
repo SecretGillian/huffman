@@ -1,3 +1,5 @@
 ../Src/compretion.c:12:6:occurence	4
 ../Src/compretion.c:43:6:creeFeuille	3
 ../Src/compretion.c:67:6:afficheTabArbreHuffman	2
+../Src/compretion.c:82:6:triArbre	4
+../Src/compretion.c:107:6:CopyNoeud	1

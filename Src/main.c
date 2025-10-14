@@ -18,7 +18,7 @@ int main(void)
 	SYSTICK_Init();*/
 	USART2_Init();
 
-	uint8_t texte[] = "aaaabbbccd";					//texte non compressé
+	uint8_t texte[] = "aaaaabbcccd";					//texte non compressé
 	//uint8_t texteCompressé[TAILLE_MAX_COMPRESS];	//text compressé
 	uint32_t tabCaractere[NBR_CARACTERE] = {0};				//tableau du nombre d'occurrence de chaque caractère
 	//uint32_t nbrCaractereDifferent = 0;				//nombre de caractère différent dans le texte nnon comprésé
@@ -40,6 +40,12 @@ int main(void)
 	printf("start creeFeuille\n\r");
 	creeFeuille(arbreHffman, tabCaractere);
 	printf("end creeFeuille\n\r");
+
+	afficheTabArbreHuffman(arbreHffman);
+
+	printf("start trie\n\r");
+	triArbre(arbreHffman);
+	printf("end trie\n\r");
 
 	afficheTabArbreHuffman(arbreHffman);
 

@@ -5,7 +5,9 @@
 	#include <stdio.h>
 	#include "main.h"
 
-	void occurence (uint8_t* chaine, uint32_t tab[NBR_CARACTERE]);
-	void creeFeuille(struct noeud* arbre[NBR_CARACTERE], uint32_t tab[NBR_CARACTERE]);
-	void afficheTabArbreHuffman(struct noeud * arbre[NBR_CARACTERE]);
+	void occurence (uint8_t* chaine, uint32_t* tab);
+	void creeFeuille(struct noeud** arbre, uint32_t* tab);
+	void afficheTabArbreHuffman(struct noeud ** arbre);
+	void triArbre(struct noeud** arbre);
+	void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2);
 #endif
