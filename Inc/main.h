@@ -16,4 +16,13 @@
 	#define TAILLE_MAX_COMPRESS 500
 	#define NBR_CARACTERE		256
 
+	struct noeud
+	{
+		uint8_t c;						//carractère initial
+		uint32_t occurence;				//nombre d'occurences
+		uint32_t code;					//conde binaire dans l'arbre
+		uint32_t tailleCode;			//nombre de bits du code
+		struct noeud *gauche, *droite;	//lien vers les neuds suivants
+	};
+
 #endif

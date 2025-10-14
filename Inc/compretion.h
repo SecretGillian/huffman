@@ -6,4 +6,5 @@
 	#include "main.h"
 
 	void occurence (uint8_t* chaine, uint32_t tab[NBR_CARACTERE]);
+	void creeFeuille(struct noeud* arbre[NBR_CARACTERE], uint32_t tab[NBR_CARACTERE]);
 #endif
