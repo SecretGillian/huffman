@@ -55,6 +55,11 @@ void creeFeuille(struct noeud** arbre, uint32_t* tab)
 }
 
 
+/**
+ * @bref fonction permetant de crée et d'initialier un élément de type noeud
+ *
+ * @return retourne un pointeur vers l'élément créer
+ */
 struct noeud* InitElement(void)
 {
 	struct noeud* ElementBuffer = (struct noeud*)malloc(sizeof(struct noeud));
@@ -138,7 +143,14 @@ void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2)
  *
  * @param arbre est un tableau de pointeurs vers l'arbre de huffman
  */
-//void CreeNoeud(struct noeud** arbre)
-//{
-//
-//}
+void CreeNoeud(struct noeud** arbre)
+{
+	struct noeud* ElementBuffer = InitElement();//création d'un nouvelle élément de type noeud
+
+	ElementBuffer->c = '!';
+	ElementBuffer->occurence = arbre[NbrFeuille - 1]->occurence + arbre[NbrFeuille - 2]->occurence;
+	ElementBuffer->gauche = arbre[NbrFeuille - 1];
+	ElementBuffer->droite = arbre[NbrFeuille - 2];
+	arbre[NbrFeuille - 2] = ElementBuffer;
+	NbrFeuille--;
+}

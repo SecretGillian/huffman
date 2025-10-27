@@ -11,4 +11,5 @@
 	void afficheTabArbreHuffman(struct noeud ** arbre);
 	void triArbre(struct noeud** arbre);
 	void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2);
+	void CreeNoeud(struct noeud** arbre);
 #endif
