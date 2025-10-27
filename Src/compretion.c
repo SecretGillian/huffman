@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "compretion.h"
 
-extern uint32_t NbrFeuille;
+static uint32_t NbrFeuille = 0;
 
 /**
  * @brief fonction permetant de compter le nombre d'occurence de chaque carractère
@@ -46,23 +46,34 @@ void creeFeuille(struct noeud** arbre, uint32_t* tab)
 	{
 		if(tab[i] != 0)
 		{
-			arbre[NbrFeuille] = (struct noeud*)malloc(sizeof(struct noeud));
+			arbre[NbrFeuille] = InitElement();
 			arbre[NbrFeuille]->c = i;
 			arbre[NbrFeuille]->occurence = tab[i];
-			arbre[NbrFeuille]->code = 0;
-			arbre[NbrFeuille]->tailleCode = 0;
-			arbre[NbrFeuille]->droite = NULL;
-			arbre[NbrFeuille]->gauche = NULL;
 			NbrFeuille++;
 		}
 	}
 }
 
 
+struct noeud* InitElement(void)
+{
+	struct noeud* ElementBuffer = (struct noeud*)malloc(sizeof(struct noeud));
+
+	ElementBuffer->c = 0;
+	ElementBuffer->occurence = 0;
+	ElementBuffer->code = 0;
+	ElementBuffer->tailleCode = 0;
+	ElementBuffer->droite = NULL;
+	ElementBuffer->gauche = NULL;
+
+	return ElementBuffer;
+}
+
+
 /**
  * @breaf afficheTabArbreHuffman permet d'afficher la totaliter de l'arbre de huffman
  *
- * @param arbre pointeur vers l'arbre de huffman
+ * @param arbre est un tableau de pointeurs vers l'arbre de huffman
  */
 void afficheTabArbreHuffman(struct noeud** arbre)
 {
@@ -74,35 +85,42 @@ void afficheTabArbreHuffman(struct noeud** arbre)
 	}
 }
 
+
 /**
  * @breaf triArbre trie l'arbre de huffman
  *
- * @param arbre pointeur vers l'arbre de huffman
+ * @param arbre est un tableau de pointeurs vers l'arbre de huffman
  */
 void triArbre(struct noeud** arbre)
 {
 	struct noeud CpyArbre;	//tructure de stockage
-	uint32_t IndexMin = 0;	//indice du carractère avec le moin d'itération
+	uint32_t IndexMax = 0;	//indice du carractère avec le plus d'occurence
 
-	for(uint32_t i = 0 ; i < NbrFeuille - 1 ; i++)
+	for(uint32_t i = 0 ; i < NbrFeuille - 1 ; i++)	//boucle permetant de parcourire l'arbre de huffman
 	{
-		IndexMin = i;
-		for(uint32_t j = i ; j < NbrFeuille ; j++)
+		IndexMax = i;
+		for(uint32_t j = i ; j < NbrFeuille ; j++)	//boucle permetant de sélectioner le carractère avec le plus grad nombre occurence à chaque itération
+
 		{
-			if(arbre[j]->occurence < arbre[IndexMin]->occurence)
+			if(arbre[j]->occurence > arbre[IndexMax]->occurence)
 			{
-				IndexMin = j;
+				IndexMax = j;
 			}
 		}
 
 		CopyNoeud(arbre[i], &CpyArbre);
-		CopyNoeud(arbre[IndexMin], arbre[i]);
-		CopyNoeud(&CpyArbre, arbre[IndexMin]);
+		CopyNoeud(arbre[IndexMax], arbre[i]);
+		CopyNoeud(&CpyArbre, arbre[IndexMax]);
 	}
 }
 
+
 /**
  * @breaf CopyNoeud copie la structure noeud1 dans la structure noeud2
+ *
+ * @param noeud1 est le noeud ou la feuille à copier
+ *
+ * @param noeud2 est le noeud ou la feuille dont on écrase la valeur
  */
 void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2)
 {
@@ -113,3 +131,14 @@ void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2)
 	noeud2->gauche = noeud1->gauche;
 	noeud2->droite = noeud1->droite;
 }
+
+
+/**
+ * @bref fonction permetant de réunire les deux dernier élément de l'arbre de huffman
+ *
+ * @param arbre est un tableau de pointeurs vers l'arbre de huffman
+ */
+//void CreeNoeud(struct noeud** arbre)
+//{
+//
+//}

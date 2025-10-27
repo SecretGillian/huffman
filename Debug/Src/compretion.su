@@ -1,5 +1,6 @@
 ../Src/compretion.c:12:6:occurence	24	static
 ../Src/compretion.c:43:6:creeFeuille	32	static
-../Src/compretion.c:67:6:afficheTabArbreHuffman	24	static
-../Src/compretion.c:82:6:triArbre	56	static
-../Src/compretion.c:107:6:CopyNoeud	16	static
+../Src/compretion.c:58:15:InitElement	16	static
+../Src/compretion.c:78:6:afficheTabArbreHuffman	24	static
+../Src/compretion.c:94:6:triArbre	56	static
+../Src/compretion.c:125:6:CopyNoeud	16	static
