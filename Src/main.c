@@ -63,12 +63,14 @@ int main(void)
 	printf("\n\n\n");
 
 	printf("strat création neud\n\r");
-	CreeNoeud(arbreHffman);
+	CreeArbre(arbreHffman);
 	printf("end création neud\n\r");
 
 	printf("\n\n\n");
 
 	afficheTabArbreHuffman(arbreHffman);
+
+	parcourirArbre(arbreHffman[0]);
 
 	while(1);
 

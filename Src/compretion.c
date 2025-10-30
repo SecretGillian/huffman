@@ -15,12 +15,12 @@ void occurence (uint8_t* chaine, uint32_t* tab)
 
 
 
-	for(uint32_t i = 0 ; i < NBR_CARACTERE ; i++)
+	for(uint32_t i = 0 ; i < NBR_CARACTERE ; i++)//boucle permetant de parcourire tout les caractère
 	{
 		y = 0;
 		tab[i] = 0;
 
-		while(chaine[y] != '\0')
+		while(chaine[y] != '\0')//boucle permetant de vérifier le nombre d'occurence de chaque carractère
 		{
 			if(chaine[y] == i)
 			{
@@ -153,4 +153,38 @@ void CreeNoeud(struct noeud** arbre)
 	ElementBuffer->droite = arbre[NbrFeuille - 2];
 	arbre[NbrFeuille - 2] = ElementBuffer;
 	NbrFeuille--;
+}
+
+
+/**
+ * @bref fonction permetant de crée l'arbre de huffman
+ *
+ * @param arbre est un tableau de pointeurs vers l'arbre de huffman
+ */
+void CreeArbre(struct noeud** arbre)
+{
+	while(NbrFeuille > 1)
+	{
+		triArbre(arbre);
+		CreeNoeud(arbre);
+	}
+}
+
+
+/**
+ * @brief fonction permetant de parcourire l'arbre de huffman
+ *
+ * @param arbre est un tableau de pointeurs vers la racine de l'arbre de huffman
+ */
+void parcourirArbre(struct noeud* ptrNoeud)
+{
+	if(ptrNoeud->droite == NULL && ptrNoeud->gauche == NULL)
+	{
+		printf("je suis une feuille\n\r\tc:%c\n\r", ptrNoeud->c);
+	}else
+	{
+		printf("je suis un neud\n\r");
+		parcourirArbre(ptrNoeud->gauche);//on va à gauche
+		parcourirArbre(ptrNoeud->droite);//on va à droite
+	}
 }

@@ -12,4 +12,6 @@
 	void triArbre(struct noeud** arbre);
 	void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2);
 	void CreeNoeud(struct noeud** arbre);
+	void CreeArbre(struct noeud** arbre);
+	void parcourirArbre(struct noeud* ptrNoeud);
 #endif

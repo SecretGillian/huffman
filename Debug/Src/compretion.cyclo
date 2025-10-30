@@ -5,3 +5,5 @@
 ../Src/compretion.c:99:6:triArbre	4
 ../Src/compretion.c:130:6:CopyNoeud	1
 ../Src/compretion.c:146:6:CreeNoeud	1
+../Src/compretion.c:164:6:CreeArbre	2
+../Src/compretion.c:174:6:parcourirArbre	3
