@@ -25,6 +25,8 @@ int main(void)
 	//uint32_t nbrCaractereDifferent = 0;				//nombre de caractère différent dans le texte nnon comprésé
 	//uint32_t nbrCaractereTotal = 0;					//nombre de caractère totale dans le texte non compressé
 	struct noeud* arbreHffman[NBR_CARACTERE] = {NULL};					//arbre de huffman
+	uint32_t code = 0;
+	uint32_t taille = 0;
 
 	printf("start occurence\n\r");
 	occurence(texte, tabCaractere);
@@ -70,7 +72,13 @@ int main(void)
 
 	afficheTabArbreHuffman(arbreHffman);
 
+	printf("\n\n\n");
+
 	parcourirArbre(arbreHffman[0]);
+
+	printf("\n\n\n");
+
+	CreerCode(arbreHffman[0], code, taille);
 
 	while(1);
 

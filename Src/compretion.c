@@ -46,9 +46,9 @@ void creeFeuille(struct noeud** arbre, uint32_t* tab)
 	{
 		if(tab[i] != 0)
 		{
-			arbre[NbrFeuille] = InitElement();
-			arbre[NbrFeuille]->c = i;
-			arbre[NbrFeuille]->occurence = tab[i];
+			arbre[NbrFeuille]				= InitElement();
+			arbre[NbrFeuille]->c			= i;
+			arbre[NbrFeuille]->occurence	= tab[i];
 			NbrFeuille++;
 		}
 	}
@@ -64,12 +64,12 @@ struct noeud* InitElement(void)
 {
 	struct noeud* ElementBuffer = (struct noeud*)malloc(sizeof(struct noeud));
 
-	ElementBuffer->c = 0;
-	ElementBuffer->occurence = 0;
-	ElementBuffer->code = 0;
-	ElementBuffer->tailleCode = 0;
-	ElementBuffer->droite = NULL;
-	ElementBuffer->gauche = NULL;
+	ElementBuffer->c			= 0;
+	ElementBuffer->occurence	= 0;
+	ElementBuffer->code			= 0;
+	ElementBuffer->tailleCode	= 0;
+	ElementBuffer->droite		= NULL;
+	ElementBuffer->gauche		= NULL;
 
 	return ElementBuffer;
 }
@@ -130,11 +130,11 @@ void triArbre(struct noeud** arbre)
 void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2)
 {
 	noeud2->c = noeud1->c;
-	noeud2->occurence = noeud1->occurence;
-	noeud2->code = noeud1->code;
-	noeud2->tailleCode = noeud1->tailleCode;
-	noeud2->gauche = noeud1->gauche;
-	noeud2->droite = noeud1->droite;
+	noeud2->occurence	= noeud1->occurence;
+	noeud2->code		= noeud1->code;
+	noeud2->tailleCode	= noeud1->tailleCode;
+	noeud2->gauche		= noeud1->gauche;
+	noeud2->droite		= noeud1->droite;
 }
 
 
@@ -148,10 +148,10 @@ void CreeNoeud(struct noeud** arbre)
 	struct noeud* ElementBuffer = InitElement();//création d'un nouvelle élément de type noeud
 
 	ElementBuffer->c = '!';
-	ElementBuffer->occurence = arbre[NbrFeuille - 1]->occurence + arbre[NbrFeuille - 2]->occurence;
-	ElementBuffer->gauche = arbre[NbrFeuille - 1];
-	ElementBuffer->droite = arbre[NbrFeuille - 2];
-	arbre[NbrFeuille - 2] = ElementBuffer;
+	ElementBuffer->occurence	= arbre[NbrFeuille - 1]->occurence + arbre[NbrFeuille - 2]->occurence;
+	ElementBuffer->gauche		= arbre[NbrFeuille - 1];
+	ElementBuffer->droite		= arbre[NbrFeuille - 2];
+	arbre[NbrFeuille - 2]		= ElementBuffer;
 	NbrFeuille--;
 }
 
@@ -186,5 +186,25 @@ void parcourirArbre(struct noeud* ptrNoeud)
 		printf("je suis un neud\n\r");
 		parcourirArbre(ptrNoeud->gauche);//on va à gauche
 		parcourirArbre(ptrNoeud->droite);//on va à droite
+	}
+}
+
+/**
+ * @brief fonction permetant de parcourire l'arbre de huffman et de crée le code de chaque carractère
+ *
+ * @param arbre est un tableau de pointeurs vers la racine de l'arbre de huffman
+ */
+void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille)
+{
+	if(ptrNoeud->droite == NULL && ptrNoeud->gauche == NULL)
+	{
+		ptrNoeud->tailleCode	= taille;
+		ptrNoeud->code			= code;
+		printf("%c \t code : %d \t taille : %d \n\r", ptrNoeud->c, ptrNoeud->code, ptrNoeud->tailleCode);
+	}else
+	{
+		printf("je suis un neud\n\r");
+		CreerCode(ptrNoeud->gauche, (code << 1) + 1, taille+1);//on va à gauche(on injecte un 0 à droite dans le code)
+		CreerCode(ptrNoeud->droite, code + 1, taille+1);//on va à droite(on injecte un 1 à droite dans le code)
 	}
 }

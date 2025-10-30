@@ -6,4 +6,5 @@
 ../Src/compretion.c:130:6:CopyNoeud	16	static
 ../Src/compretion.c:146:6:CreeNoeud	24	static
 ../Src/compretion.c:164:6:CreeArbre	16	static
-../Src/compretion.c:174:6:parcourirArbre	16	static
+../Src/compretion.c:179:6:parcourirArbre	16	static
+../Src/compretion.c:197:6:CreerCode	24	static

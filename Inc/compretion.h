@@ -14,4 +14,5 @@
 	void CreeNoeud(struct noeud** arbre);
 	void CreeArbre(struct noeud** arbre);
 	void parcourirArbre(struct noeud* ptrNoeud);
+	void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille);
 #endif
