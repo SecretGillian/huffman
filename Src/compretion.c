@@ -192,7 +192,11 @@ void parcourirArbre(struct noeud* ptrNoeud)
 /**
  * @brief fonction permetant de parcourire l'arbre de huffman et de crée le code de chaque carractère
  *
- * @param arbre est un tableau de pointeurs vers la racine de l'arbre de huffman
+ * @param ptrNoeud est un tableau de pointeurs vers la racine de l'arbre de huffman
+ *
+ * @param code permet de rensaigner le code du caractère
+ *
+ * @param taille permet de rensaigner la taille du code
  */
 void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille)
 {
@@ -206,5 +210,42 @@ void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille)
 		printf("je suis un neud\n\r");
 		CreerCode(ptrNoeud->gauche, (code << 1) + 1, taille+1);//on va à gauche(on injecte un 0 à droite dans le code)
 		CreerCode(ptrNoeud->droite, code + 1, taille+1);//on va à droite(on injecte un 1 à droite dans le code)
+	}
+}
+
+/**
+ * @bref fonction permetant de retourner l'adresse de la structure corespondant au caractère ransaigner
+ *
+ * @param arbre est un tableau de pointeurs vers la racine de l'arbre de huffman
+ *
+ * @param caractere permet de resegner le caractère que l'on recherche
+ */
+struct noeud* GetAddress(struct noeud* ptrNoeud, uint8_t caractere)
+{
+	struct noeud* ElementBuffer = NULL;
+
+	if(ptrNoeud->droite == NULL && ptrNoeud->gauche == NULL)
+	{
+		if(ptrNoeud->c == caractere)
+		{
+			return ptrNoeud;
+		}
+
+		return NULL;
+	}else
+	{
+		ElementBuffer = GetAddress(ptrNoeud->gauche, caractere);//on va à gauche
+		if(ElementBuffer != NULL)
+		{
+			return ElementBuffer;
+		}
+
+		ElementBuffer = GetAddress(ptrNoeud->droite, caractere);//on va à droite
+		if(ElementBuffer != NULL)
+		{
+			return ElementBuffer;
+		}
+
+		return NULL;
 	}
 }

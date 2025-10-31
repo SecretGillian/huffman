@@ -7,4 +7,5 @@
 ../Src/compretion.c:146:6:CreeNoeud	1
 ../Src/compretion.c:164:6:CreeArbre	2
 ../Src/compretion.c:179:6:parcourirArbre	3
-../Src/compretion.c:197:6:CreerCode	3
+../Src/compretion.c:201:6:CreerCode	3
+../Src/compretion.c:223:15:GetAddress	6

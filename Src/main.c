@@ -19,7 +19,7 @@ int main(void)
 	USART2_Init();
 
 	uint8_t texte[] = "aaaabbbccd";					//texte non compressé
-	//uint8_t texteCompressé[TAILLE_MAX_COMPRESS];	//text compressé
+	uint8_t texteCompressé[TAILLE_MAX_COMPRESS];	//text compressé
 	uint32_t tabCaractere[NBR_CARACTERE] = {0};				//tableau du nombre d'occurrence de chaque caractère
 	//uint32_t nbrCaractereDifferent = 0;				//nombre de caractère différent dans le texte nnon comprésé
 	//uint32_t nbrCaractereDifferent = 0;				//nombre de caractère différent dans le texte nnon comprésé
@@ -79,6 +79,11 @@ int main(void)
 	printf("\n\n\n");
 
 	CreerCode(arbreHffman[0], code, taille);
+
+	printf("\n\n\n");
+
+	arbreHffman[NBR_CARACTERE - 1] = GetAddress(arbreHffman[0], 'c');
+	printf("%c \t code : %d \t taille : %d \n\r", arbreHffman[NBR_CARACTERE - 1]->c, arbreHffman[NBR_CARACTERE - 1]->code, arbreHffman[NBR_CARACTERE - 1]->tailleCode);
 
 	while(1);
 
