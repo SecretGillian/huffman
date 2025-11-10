@@ -208,8 +208,8 @@ void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille)
 	}else
 	{
 		printf("je suis un neud\n\r");
-		CreerCode(ptrNoeud->gauche, (code << 1) + 1, taille+1);//on va à gauche(on injecte un 0 à droite dans le code)
-		CreerCode(ptrNoeud->droite, code + 1, taille+1);//on va à droite(on injecte un 1 à droite dans le code)
+		CreerCode(ptrNoeud->gauche, (code << 1), taille+1);//on va à gauche(on injecte un 0 à droite dans le code)
+		CreerCode(ptrNoeud->droite, (code << 1) + 1, taille+1);//on va à droite(on injecte un 1 à droite dans le code)
 	}
 }
 

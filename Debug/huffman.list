@@ -801,20 +801,20 @@ void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille)
 		printf("je suis un neud\n\r");
  800069a:	480e      	ldr	r0, [pc, #56]	@ (80006d4 <CreerCode+0x78>)
  800069c:	f000 fcea 	bl	8001074 <iprintf>
-		CreerCode(ptrNoeud->gauche, (code << 1) + 1, taille+1);//on va à gauche(on injecte un 0 à droite dans le code)
+		CreerCode(ptrNoeud->gauche, (code << 1), taille+1);//on va à gauche(on injecte un 0 à droite dans le code)
  80006a0:	68fb      	ldr	r3, [r7, #12]
  80006a2:	6918      	ldr	r0, [r3, #16]
  80006a4:	68bb      	ldr	r3, [r7, #8]
- 80006a6:	005b      	lsls	r3, r3, #1
- 80006a8:	1c59      	adds	r1, r3, #1
- 80006aa:	687b      	ldr	r3, [r7, #4]
- 80006ac:	3301      	adds	r3, #1
- 80006ae:	461a      	mov	r2, r3
- 80006b0:	f7ff ffd4 	bl	800065c <CreerCode>
-		CreerCode(ptrNoeud->droite, code + 1, taille+1);//on va à droite(on injecte un 1 à droite dans le code)
- 80006b4:	68fb      	ldr	r3, [r7, #12]
- 80006b6:	6958      	ldr	r0, [r3, #20]
- 80006b8:	68bb      	ldr	r3, [r7, #8]
+ 80006a6:	0059      	lsls	r1, r3, #1
+ 80006a8:	687b      	ldr	r3, [r7, #4]
+ 80006aa:	3301      	adds	r3, #1
+ 80006ac:	461a      	mov	r2, r3
+ 80006ae:	f7ff ffd5 	bl	800065c <CreerCode>
+		CreerCode(ptrNoeud->droite, (code << 1) + 1, taille+1);//on va à droite(on injecte un 1 à droite dans le code)
+ 80006b2:	68fb      	ldr	r3, [r7, #12]
+ 80006b4:	6958      	ldr	r0, [r3, #20]
+ 80006b6:	68bb      	ldr	r3, [r7, #8]
+ 80006b8:	005b      	lsls	r3, r3, #1
  80006ba:	1c59      	adds	r1, r3, #1
  80006bc:	687b      	ldr	r3, [r7, #4]
  80006be:	3301      	adds	r3, #1
