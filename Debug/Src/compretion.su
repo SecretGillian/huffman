@@ -9,3 +9,4 @@
 ../Src/compretion.c:179:6:parcourirArbre	16	static
 ../Src/compretion.c:201:6:CreerCode	24	static
 ../Src/compretion.c:223:15:GetAddress	24	static
+../Src/compretion.c:263:6:FillOutput	40	static

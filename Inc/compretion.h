@@ -16,4 +16,6 @@
 	void parcourirArbre(struct noeud* ptrNoeud);
 	void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille);
 	struct noeud* GetAddress(struct noeud* PtrNoeud, uint8_t caractere);
+	void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrTextInput);
+
 #endif

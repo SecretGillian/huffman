@@ -174,7 +174,7 @@ void CreeArbre(struct noeud** arbre)
 /**
  * @brief fonction permetant de parcourire l'arbre de huffman
  *
- * @param arbre est un tableau de pointeurs vers la racine de l'arbre de huffman
+ * @param ptrNoeud est un pointeurs vers la racine de l'arbre de huffman
  */
 void parcourirArbre(struct noeud* ptrNoeud)
 {
@@ -192,7 +192,7 @@ void parcourirArbre(struct noeud* ptrNoeud)
 /**
  * @brief fonction permetant de parcourire l'arbre de huffman et de crée le code de chaque carractère
  *
- * @param ptrNoeud est un tableau de pointeurs vers la racine de l'arbre de huffman
+ * @param ptrNoeud est un pointeurs vers la racine de l'arbre de huffman
  *
  * @param code permet de rensaigner le code du caractère
  *
@@ -216,7 +216,7 @@ void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille)
 /**
  * @bref fonction permetant de retourner l'adresse de la structure corespondant au caractère ransaigner
  *
- * @param arbre est un tableau de pointeurs vers la racine de l'arbre de huffman
+ * @param ptrNoeud est un pointeur vers la racine de l'arbre de huffman
  *
  * @param caractere permet de resegner le caractère que l'on recherche
  */
@@ -248,4 +248,47 @@ struct noeud* GetAddress(struct noeud* ptrNoeud, uint8_t caractere)
 
 		return NULL;
 	}
+}
+
+
+/**
+ * @brief rempli le buffer de sorti
+ *
+ * @param PtrOutputVal est le pinteur vers le tableau où est stocké le text compressé
+ *
+ * @param PtrNoeud est un pointeurs vers la racine de l'arbre de huffman
+ *
+ * @param PtrTextInput est un pointeurs vers la chaine de caractère d'entré
+ */
+void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrTextInput)
+{
+	uint8_t CptBit				= 0;
+	uint16_t IndexIn			= 0;
+	uint16_t IndexOut			= 0;
+	struct noeud* ElementBuffer	= NULL;
+
+	while(PtrTextInput[IndexIn] != '\0')
+	{
+		ElementBuffer = GetAddress(ptrNoeud, PtrTextInput[IndexIn]);
+		for(uint8_t i = 0 ; i < ElementBuffer->tailleCode ; i++)
+		{
+			if(CptBit >= 8)
+			{
+				IndexOut++;
+				CptBit = 0;
+			}
+			if(ElementBuffer->code & (1 << (ElementBuffer->tailleCode - 1 - i)))
+			{
+				PtrTextOutput[IndexOut] |= (1 << CptBit);
+			}else
+			{
+				PtrTextOutput[IndexOut] &= ~(1 << CptBit);
+			}
+
+			CptBit++;
+		}
+
+		IndexIn++;
+	}
+	PtrTextOutput[IndexOut + 1] = '\0';
 }
