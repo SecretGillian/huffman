@@ -19,7 +19,7 @@ int main(void)
 	USART2_Init();
 
 	uint8_t texte[] = "aaaabbbccd";						//texte non compressé
-	uint8_t texteCompresse[TAILLE_MAX_COMPRESS];		//text compressé
+	uint8_t texteCompresse[TAILLE_MAX_COMPRESS] = {0};	//text compressé
 	uint32_t tabCaractere[NBR_CARACTERE] = {0};			//tableau du nombre d'occurrence de chaque caractère
 	//uint32_t nbrCaractereDifferent = 0;				//nombre de caractère différent dans le texte nnon comprésé
 	//uint32_t nbrCaractereDifferent = 0;				//nombre de caractère différent dans le texte nnon comprésé

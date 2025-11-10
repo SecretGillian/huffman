@@ -279,10 +279,12 @@ void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrText
 			}
 			if(ElementBuffer->code & (1 << (ElementBuffer->tailleCode - 1 - i)))
 			{
-				PtrTextOutput[IndexOut] |= (1 << CptBit);
+				PtrTextOutput[IndexOut] |= (1 << (7 - CptBit));
+				printf("1\n\r");
 			}else
 			{
-				PtrTextOutput[IndexOut] &= ~(1 << CptBit);
+				PtrTextOutput[IndexOut] &= ~(1 << (7 - CptBit));
+				printf("0\n\r");
 			}
 
 			CptBit++;
@@ -290,5 +292,4 @@ void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrText
 
 		IndexIn++;
 	}
-	PtrTextOutput[IndexOut + 1] = '\0';
 }
