@@ -129,7 +129,7 @@ void triArbre(struct noeud** arbre)
  */
 void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2)
 {
-	noeud2->c = noeud1->c;
+	noeud2->c			= noeud1->c;
 	noeud2->occurence	= noeud1->occurence;
 	noeud2->code		= noeud1->code;
 	noeud2->tailleCode	= noeud1->tailleCode;
@@ -267,12 +267,12 @@ void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrText
 	uint16_t IndexOut			= 0;
 	struct noeud* ElementBuffer	= NULL;
 
-	while(PtrTextInput[IndexIn] != '\0')
+	while(PtrTextInput[IndexIn] != '\0')//parcoure le text d'entée
 	{
-		ElementBuffer = GetAddress(ptrNoeud, PtrTextInput[IndexIn]);
+		ElementBuffer = GetAddress(ptrNoeud, PtrTextInput[IndexIn]);//récupère les information du caractère
 		for(uint8_t i = 0 ; i < ElementBuffer->tailleCode ; i++)
 		{
-			if(CptBit >= 8)
+			if(CptBit >= 8)//vérifi si on a dépasser la taille de la case actuel
 			{
 				IndexOut++;
 				CptBit = 0;

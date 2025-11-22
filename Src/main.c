@@ -28,12 +28,12 @@ int main(void)
 	uint32_t code = 0;
 	uint32_t taille = 0;
 
-	printf("start occurence\n\r");
+	printf("------------------------------------------start occurence\n\r");
 	occurence(texte, tabCaractere);
-	printf("end occurence\n\r");
 
 	printf("\n\n\n");
 
+	//affiche les caractère présant dans le text et leurs nombre d'occurance
 	for(uint32_t i = 0 ; i < NBR_CARACTERE ; i++)
 	{
 		if(tabCaractere[i])
@@ -41,59 +41,57 @@ int main(void)
 			printf("%c = %u \n\r", i, tabCaractere[i]);
 		}
 	}
+	printf("---------------------end occurence\n\r");
 
 	printf("\n\n\n");
 
-	printf("start creeFeuille\n\r");
+	printf("---------------------start creeFeuille\n\r");
 	creeFeuille(arbreHffman, tabCaractere);
-	printf("end creeFeuille\n\r");
-
-	printf("\n\n\n");
 
 	afficheTabArbreHuffman(arbreHffman);
+	printf("---------------------end creeFeuille\n\r");
 
 	printf("\n\n\n");
 
-	printf("start trie\n\r");
+	printf("---------------------start triArbre\n\r");
 	triArbre(arbreHffman);
-	printf("end trie\n\r");
-
-	printf("\n\n\n");
 
 	afficheTabArbreHuffman(arbreHffman);
+	printf("---------------------end triArbre\n\r");
 
 	printf("\n\n\n");
 
-	printf("strat création neud\n\r");
+	printf("---------------------start CreeArbre\n\r");
 	CreeArbre(arbreHffman);
-	printf("end création neud\n\r");
 
 	printf("\n\n\n");
 
 	afficheTabArbreHuffman(arbreHffman);
+	printf("---------------------end CreeArbre\n\r");
 
 	printf("\n\n\n");
 
-	printf("start parcourirArbre\n\r");
+	printf("---------------------start parcourirArbre\n\r");
 	parcourirArbre(arbreHffman[0]);
-	printf("end parcourirArbre\n\r");
+	printf("---------------------end parcourirArbre\n\r");
 
 	printf("\n\n\n");
 
-	printf("start CreerCode\n\r");
+	printf("---------------------start CreerCode\n\r");
 	CreerCode(arbreHffman[0], code, taille);
-	printf("end CreerCode\n\r");
+	printf("---------------------end CreerCode\n\r");
 
 	printf("\n\n\n");
 
+	printf("---------------------start GetAddress\n\r");
 	arbreHffman[NBR_CARACTERE - 1] = GetAddress(arbreHffman[0], 'c');
 	printf("%c \t code : %d \t taille : %d \n\r", arbreHffman[NBR_CARACTERE - 1]->c, arbreHffman[NBR_CARACTERE - 1]->code, arbreHffman[NBR_CARACTERE - 1]->tailleCode);
+	printf("---------------------end GetAddress\n\r");
 
 	printf("\n\n\n");
 
-	printf("start FillOutput\n\r");
+	printf("---------------------start FillOutput\n\r");
 	FillOutput(texteCompresse, arbreHffman[0], texte);
-	printf("end FillOutput\n\r");
 
 	uint8_t i = 0;
 	while(texteCompresse[i] != '\0')
@@ -101,6 +99,7 @@ int main(void)
 		printf("OutVal : %x\n\r", texteCompresse[i]);
 		i++;
 	}
+	printf("---------------------end FillOutput\n\r");
 
 	while(1);
 

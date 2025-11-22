@@ -18,4 +18,18 @@
 	struct noeud* GetAddress(struct noeud* PtrNoeud, uint8_t caractere);
 	void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrTextInput);
 
+	#define TAILLE_MAX_COMPRESS 500
+
+	typedef union
+	{
+		uint8_t texteCompresse[TAILLE_MAX_COMPRESS];	//text compressé
+		struct
+		{
+			uint16_t EnteteSize;
+			uint16_t MsgSize;
+			uint16_t NbrCaractereTotal;
+			uint8_t Msg[TAILLE_MAX_COMPRESS - 6/*car 3*16 bite sois 3*2 octet*/];
+		};
+	}T_ENTETE;
+
 #endif
