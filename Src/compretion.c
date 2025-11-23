@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include "compretion.h"
 
-static uint32_t NbrFeuille = 0;
+static uint32_t NbrFeuille 	= 0;
+uint8_t NbrChar				= 0;
 
 /**
  * @brief fonction permetant de compter le nombre d'occurence de chaque carractère
@@ -87,6 +88,15 @@ void afficheTabArbreHuffman(struct noeud** arbre)
 		printf("feuille %u :\n\r", i);
 		printf("\t c = %c \n \r", arbre[i]->c);
 		printf("\t occurence = %u \n \r", arbre[i]->occurence);
+	}
+
+	printf("\n\n\n");
+
+	for(uint8_t i = 0 ; i < NbrChar ; i++)
+	{
+		printf("feuille %u :\n\r", i);
+		printf("\t c = %c \n \r", arbre[NBR_CARACTERE - i - 1]->c);
+		printf("\t occurence = %u \n \r", arbre[NBR_CARACTERE - i - 1]->occurence);
 	}
 }
 
@@ -176,16 +186,18 @@ void CreeArbre(struct noeud** arbre)
  *
  * @param ptrNoeud est un pointeurs vers la racine de l'arbre de huffman
  */
-void parcourirArbre(struct noeud* ptrNoeud)
+void parcourirArbre(struct noeud* ptrNoeud, struct noeud** arbre)
 {
 	if(ptrNoeud->droite == NULL && ptrNoeud->gauche == NULL)
 	{
 		printf("je suis une feuille\n\r\tc:%c\n\r", ptrNoeud->c);
+		arbre[NBR_CARACTERE - NbrChar - 1] = ptrNoeud;//réorganisation pour faciliter leur récupération
+		NbrChar++;//incrémente un compteur pour connaitre le nombre de caractère
 	}else
 	{
 		printf("je suis un neud\n\r");
-		parcourirArbre(ptrNoeud->gauche);//on va à gauche
-		parcourirArbre(ptrNoeud->droite);//on va à droite
+		parcourirArbre(ptrNoeud->gauche, arbre);//on va à gauche
+		parcourirArbre(ptrNoeud->droite, arbre);//on va à droite
 	}
 }
 
@@ -262,14 +274,31 @@ struct noeud* GetAddress(struct noeud* ptrNoeud, uint8_t caractere)
  */
 void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrTextInput)
 {
-	uint8_t CptBit				= 0;
-	uint16_t IndexIn			= 0;
-	uint16_t IndexOut			= 0;
-	struct noeud* ElementBuffer	= NULL;
+	uint8_t CptBit						= 0;
+	uint16_t IndexIn					= 0;
+	uint16_t IndexOut					= 0;
+	struct noeud* ElementBuffer			= NULL;
+//	uint8_t new 						= 1;
 
 	while(PtrTextInput[IndexIn] != '\0')//parcoure le text d'entée
 	{
 		ElementBuffer = GetAddress(ptrNoeud, PtrTextInput[IndexIn]);//récupère les information du caractère
+
+//		//vérifi si il y a un louveau caractère
+//		for(uint8_t i = 0 ; i < NbrChar ; i++)
+//		{
+//			if(ElementBuffer->c == ComparChar[i])
+//			{
+//				new = 0;
+//			}
+//		}
+//
+//		//si il y a un nouveau caractère alor on incrémente le nombre de caractère
+//		if(new)
+//		{
+//			NbrChar++;
+//		}
+
 		for(uint8_t i = 0 ; i < ElementBuffer->tailleCode ; i++)
 		{
 			if(CptBit >= 8)//vérifi si on a dépasser la taille de la case actuel
@@ -293,3 +322,11 @@ void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrText
 		IndexIn++;
 	}
 }
+
+//void CreeE(T_COMPRESS_CHAR* StructCompress)
+//{
+//	for(uint8_t i = 0 ; i < TAILLE_MAX_COMPRESS ; i++)
+//	{
+//		StructCompress->texteCompresse = 0;
+//	}
+//}
