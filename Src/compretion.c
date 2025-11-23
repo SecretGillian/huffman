@@ -185,6 +185,8 @@ void CreeArbre(struct noeud** arbre)
  * @brief fonction permetant de parcourire l'arbre de huffman
  *
  * @param ptrNoeud est un pointeurs vers la racine de l'arbre de huffman
+ *
+ * @param arbre est un tableau de pointeurs vers l'arbre de huffman
  */
 void parcourirArbre(struct noeud* ptrNoeud, struct noeud** arbre)
 {
@@ -262,6 +264,16 @@ struct noeud* GetAddress(struct noeud* ptrNoeud, uint8_t caractere)
 	}
 }
 
+//struct noeud* GetAddress(struct noeud** arbre, uint8_t caractere)
+//{
+//	for(uint8_t i = 0 ; i < NbrChar ; i++)
+//	{
+//		if(arbre[NBR_CARACTERE - i - 1]->c == caractere)
+//			return arbre[i];
+//	}
+//	return NULL;
+//}
+
 
 /**
  * @brief rempli le buffer de sorti
@@ -278,26 +290,12 @@ void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrText
 	uint16_t IndexIn					= 0;
 	uint16_t IndexOut					= 0;
 	struct noeud* ElementBuffer			= NULL;
+	const uint8_t EnteteStructSize		= sizeof(T_ENTETE);
 //	uint8_t new 						= 1;
 
 	while(PtrTextInput[IndexIn] != '\0')//parcoure le text d'entée
 	{
 		ElementBuffer = GetAddress(ptrNoeud, PtrTextInput[IndexIn]);//récupère les information du caractère
-
-//		//vérifi si il y a un louveau caractère
-//		for(uint8_t i = 0 ; i < NbrChar ; i++)
-//		{
-//			if(ElementBuffer->c == ComparChar[i])
-//			{
-//				new = 0;
-//			}
-//		}
-//
-//		//si il y a un nouveau caractère alor on incrémente le nombre de caractère
-//		if(new)
-//		{
-//			NbrChar++;
-//		}
 
 		for(uint8_t i = 0 ; i < ElementBuffer->tailleCode ; i++)
 		{
@@ -308,11 +306,11 @@ void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrText
 			}
 			if(ElementBuffer->code & (1 << (ElementBuffer->tailleCode - 1 - i)))
 			{
-				PtrTextOutput[IndexOut] |= (1 << (7 - CptBit));
+				PtrTextOutput[IndexOut + EnteteStructSize * NbrChar] |= (1 << (7 - CptBit));
 				printf("1\n\r");
 			}else
 			{
-				PtrTextOutput[IndexOut] &= ~(1 << (7 - CptBit));
+				PtrTextOutput[IndexOut + EnteteStructSize * NbrChar] &= ~(1 << (7 - CptBit));
 				printf("0\n\r");
 			}
 
@@ -323,10 +321,45 @@ void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrText
 	}
 }
 
-//void CreeE(T_COMPRESS_CHAR* StructCompress)
+//void FillOutput(uint8_t* PtrTextOutput, struct noeud** arbre, uint8_t* PtrTextInput)
 //{
-//	for(uint8_t i = 0 ; i < TAILLE_MAX_COMPRESS ; i++)
+//	uint8_t CptBit						= 0;
+//	uint16_t IndexIn					= 0;
+//	uint16_t IndexOut					= 0;
+//	struct noeud* ElementBuffer			= NULL;
+////	uint8_t new 						= 1;
+//
+//	while(PtrTextInput[IndexIn] != '\0')//parcoure le text d'entée
 //	{
-//		StructCompress->texteCompresse = 0;
+//		ElementBuffer = GetAddress(arbre, PtrTextInput[IndexIn]);//récupère les information du caractère
+//
+//		for(uint8_t i = 0 ; i < ElementBuffer->tailleCode ; i++)
+//		{
+//			if(CptBit >= 8)//vérifi si on a dépasser la taille de la case actuel
+//			{
+//				IndexOut++;
+//				CptBit = 0;
+//			}
+//			if(ElementBuffer->code & (1 << (ElementBuffer->tailleCode - 1 - i)))
+//			{
+//				PtrTextOutput[IndexOut] |= (1 << (7 - CptBit));
+//				printf("1\n\r");
+//			}else
+//			{
+//				PtrTextOutput[IndexOut] &= ~(1 << (7 - CptBit));
+//				printf("0\n\r");
+//			}
+//
+//			CptBit++;
+//		}
+//
+//		IndexIn++;
 //	}
 //}
+
+void FillEntete(T_COMPRESS_CHAR* StructCompress, struct noeud** arbre)
+{
+	for(uint8_t i = 0 ; i < TAILLE_MAX_COMPRESS ; i++)
+	{
+	}
+}

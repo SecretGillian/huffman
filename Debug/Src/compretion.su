@@ -6,7 +6,8 @@
 ../Src/compretion.c:140:6:CopyNoeud	16	static
 ../Src/compretion.c:156:6:CreeNoeud	24	static
 ../Src/compretion.c:174:6:CreeArbre	16	static
-../Src/compretion.c:189:6:parcourirArbre	16	static
-../Src/compretion.c:213:6:CreerCode	24	static
-../Src/compretion.c:235:15:GetAddress	24	static
-../Src/compretion.c:275:6:FillOutput	40	static
+../Src/compretion.c:191:6:parcourirArbre	16	static
+../Src/compretion.c:215:6:CreerCode	24	static
+../Src/compretion.c:237:15:GetAddress	24	static
+../Src/compretion.c:287:6:FillOutput	40	static
+../Src/compretion.c:360:6:FillEntete	24	static

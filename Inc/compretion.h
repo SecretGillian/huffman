@@ -16,7 +16,9 @@
 	void parcourirArbre(struct noeud* ptrNoeud, struct noeud** arbre);
 	void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille);
 	struct noeud* GetAddress(struct noeud* PtrNoeud, uint8_t caractere);
+//	struct noeud* GetAddress(struct noeud** arbre, uint8_t caractere);
 	void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrTextInput);
+//	void FillOutput(uint8_t* PtrTextOutput, struct noeud** arbre, uint8_t* PtrTextInput);
 
 	#define TAILLE_MAX_COMPRESS 500
 
@@ -25,10 +27,10 @@
 		uint8_t texteCompresse[TAILLE_MAX_COMPRESS];	//text compressé
 		struct
 		{
-			uint16_t EnteteSize;
-			uint16_t MsgSize;
-			uint16_t NbrCaractereTotal;
-			uint8_t Msg[TAILLE_MAX_COMPRESS - 6/*car 3*16 bite sois 3*2 octet*/];
+			uint16_t EnteteSize;//taile de l'entête
+			uint16_t MsgSize;//taille du fichier compressé
+			uint16_t NbrCaractereTotal;//nombre totall de caractère du fichier d'origine
+			uint8_t Msg[TAILLE_MAX_COMPRESS - 6/*car 3*16 bite sois 3*2 octet*/];//emplacement pour entrer le reste du message
 		};
 	}T_COMPRESS_CHAR;
 

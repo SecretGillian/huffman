@@ -95,12 +95,20 @@ int main(void)
 	printf("---------------------start FillOutput\n\r");
 	FillOutput(texteCompresse.Msg, arbreHffman[0], texte);
 
-	uint8_t i = 0;
-	while(texteCompresse.Msg[i] != '\0')
+//	uint8_t i = 0;
+//	while(texteCompresse.texteCompresse[i] != '\0')
+//	{
+//		printf("OutVal : %p\n\r", texteCompresse.texteCompresse[i]);
+//		i++;
+//	}
+
+	printf("\n\n\n");
+
+	for(uint16_t i = 0 ; i < TAILLE_MAX_COMPRESS ; i++)
 	{
-		printf("OutVal : %x\n\r", texteCompresse.Msg[i]);
-		i++;
+		printf("%d : "BYTE_TO_BINARY_PATTERN" | %02X \n\r", i, BYTE_TO_BINARY(texteCompresse.texteCompresse[i]), texteCompresse.texteCompresse[i]);
 	}
+
 	printf("---------------------end FillOutput\n\r");
 
 	printf("\n\n\n");
