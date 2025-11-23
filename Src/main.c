@@ -9,7 +9,7 @@
 #include "util.h"
 #include "compretion.h"
 
-
+extern uint8_t const NbrChar;
 
 int main(void)
 {
@@ -24,7 +24,7 @@ int main(void)
 	//uint32_t nbrCaractereDifferent = 0;						//nombre de caractère différent dans le texte nnon comprésé
 	//uint32_t nbrCaractereDifferent = 0;						//nombre de caractère différent dans le texte nnon comprésé
 	//uint32_t nbrCaractereTotal = 0;							//nombre de caractère totale dans le texte non compressé
-	struct noeud* arbreHffman[NBR_CARACTERE] = {NULL};			//arbre de huffman
+	struct noeud* arbreHuffman[NBR_CARACTERE] = {NULL};			//arbre de huffman
 	uint32_t code = 0;
 	uint32_t taille = 0;
 
@@ -46,55 +46,57 @@ int main(void)
 	printf("\n\n\n");
 
 	printf("---------------------start creeFeuille\n\r");
-	creeFeuille(arbreHffman, tabCaractere);
+	creeFeuille(arbreHuffman, tabCaractere);
 
-	afficheTabArbreHuffman(arbreHffman);
+	afficheTabArbreHuffman(arbreHuffman);
 	printf("---------------------end creeFeuille\n\r");
 
 	printf("\n\n\n");
 
 	printf("---------------------start triArbre\n\r");
-	triArbre(arbreHffman);
+	triArbre(arbreHuffman);
 
-	afficheTabArbreHuffman(arbreHffman);
+	afficheTabArbreHuffman(arbreHuffman);
 	printf("---------------------end triArbre\n\r");
 
 	printf("\n\n\n");
 
 	printf("---------------------start CreeArbre\n\r");
-	CreeArbre(arbreHffman);
+	CreeArbre(arbreHuffman);
 
 	printf("\n\n\n");
 
-	afficheTabArbreHuffman(arbreHffman);
+	afficheTabArbreHuffman(arbreHuffman);
 	printf("---------------------end CreeArbre\n\r");
 
 	printf("\n\n\n");
 
 	printf("---------------------start parcourirArbre\n\r");
-	parcourirArbre(arbreHffman[0], arbreHffman);
+	parcourirArbre(arbreHuffman[0], arbreHuffman);
 
-	afficheTabArbreHuffman(arbreHffman);
+	afficheTabArbreHuffman(arbreHuffman);
 	printf("---------------------end parcourirArbre\n\r");
 
 	printf("\n\n\n");
 
 	printf("---------------------start CreerCode\n\r");
-	CreerCode(arbreHffman[0], code, taille);
+	CreerCode(arbreHuffman[0], code, taille);
 	printf("---------------------end CreerCode\n\r");
 
 	printf("\n\n\n");
 
 	printf("---------------------start GetAddress\n\r");
-	arbreHffman[NBR_CARACTERE - 1] = GetAddress(arbreHffman[0], 'c');
-	printf("%c \t code : %d \t taille : %d \n\r", arbreHffman[NBR_CARACTERE - 1]->c, arbreHffman[NBR_CARACTERE - 1]->code, arbreHffman[NBR_CARACTERE - 1]->tailleCode);
+	arbreHuffman[NBR_CARACTERE - NbrChar - 1] = GetAddress(arbreHuffman[0], 'c');
+	printf("%c \t code : %d \t taille : %d \n\r", arbreHuffman[NBR_CARACTERE - 1]->c, arbreHuffman[NBR_CARACTERE - 1]->code, arbreHuffman[NBR_CARACTERE - 1]->tailleCode);
 	printf("---------------------end GetAddress\n\r");
 
 	printf("\n\n\n");
 
 	printf("---------------------start FillOutput\n\r");
-	FillOutput(texteCompresse.Msg, arbreHffman[0], texte);
+	FillOutput(texteCompresse.Msg, arbreHuffman[0], texte);
 
+	printf("---------------------start FillOutput\n\r");
+	FillEntete(&texteCompresse, arbreHuffman, strlen(/*(char*)*/texte));
 //	uint8_t i = 0;
 //	while(texteCompresse.texteCompresse[i] != '\0')
 //	{

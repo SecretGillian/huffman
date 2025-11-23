@@ -10,4 +10,4 @@
 ../Src/compretion.c:215:6:CreerCode	3
 ../Src/compretion.c:237:15:GetAddress	6
 ../Src/compretion.c:287:6:FillOutput	5
-../Src/compretion.c:360:6:FillEntete	1
+../Src/compretion.c:370:6:FillEntete	2

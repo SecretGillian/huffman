@@ -357,9 +357,30 @@ void FillOutput(uint8_t* PtrTextOutput, struct noeud* ptrNoeud, uint8_t* PtrText
 //	}
 //}
 
-void FillEntete(T_COMPRESS_CHAR* StructCompress, struct noeud** arbre)
+
+/**
+ * @brief rempli l'entète du message
+ *
+ * @param StructCompress est un pointeur vers l'union représentant le buffer de sorti
+ *
+ * @param arbre est un tableau de pointeurs vers l'arbre de huffman
+ *
+ * @param StrSize est le nombre de caratère contenu dans le message à compresser
+ */
+void FillEntete(T_COMPRESS_CHAR* StructCompress, struct noeud** arbre, uint16_t StrSize)
 {
-	for(uint8_t i = 0 ; i < TAILLE_MAX_COMPRESS ; i++)
+	uint8_t EnteteStructSize	= sizeof(T_ENTETE);
+	T_ENTETE* CharInfo 			= /*(T_ENTETE*)*/StructCompress->Msg;
+
+	StructCompress->EnteteSize			= 6 + EnteteStructSize * NbrChar;//0x1122;
+	StructCompress->MsgSize				= StructCompress->EnteteSize + StrSize;//0x3344;
+	StructCompress->NbrCaractereTotal	= StrSize;//0x5566;
+
+	for(uint8_t i = 0 ; i < NbrChar ; i++)
 	{
+		CharInfo[i].CaractereInicial	= arbre[NBR_CARACTERE - i - 1]->c;//0xAA;
+		CharInfo[i].CodeSize			= arbre[NBR_CARACTERE - i - 1]->tailleCode;//0b1100;
+		CharInfo[i].Code				= arbre[NBR_CARACTERE - i - 1]->code;//0b111000111000;
 	}
+	printf("test union : %0X\n\r", CharInfo[0].Code);
 }

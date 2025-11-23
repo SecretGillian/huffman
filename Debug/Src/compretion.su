@@ -10,4 +10,4 @@
 ../Src/compretion.c:215:6:CreerCode	24	static
 ../Src/compretion.c:237:15:GetAddress	24	static
 ../Src/compretion.c:287:6:FillOutput	40	static
-../Src/compretion.c:360:6:FillEntete	24	static
+../Src/compretion.c:370:6:FillEntete	32	static
