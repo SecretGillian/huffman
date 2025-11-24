@@ -8,6 +8,7 @@
 #include "timer.h"
 #include "util.h"
 #include "compretion.h"
+#include "decompression.h"
 
 extern uint8_t const NbrChar;
 
@@ -95,7 +96,7 @@ int main(void)
 	printf("---------------------start FillOutput\n\r");
 	FillOutput(texteCompresse.Msg, arbreHuffman[0], texte);
 
-	printf("---------------------start FillOutput\n\r");
+	printf("---------------------start FillEntete\n\r");
 	FillEntete(&texteCompresse, arbreHuffman, strlen(/*(char*)*/texte));
 //	uint8_t i = 0;
 //	while(texteCompresse.texteCompresse[i] != '\0')
@@ -115,7 +116,22 @@ int main(void)
 
 	printf("\n\n\n");
 
+	printf("---------------------start trieEntete\n\r");
+	T_ENTETE TestEntete[NbrChar];
+	T_ENTETE* PtrTestEntete = /*(T_ENTETE*)*/texteCompresse.Msg;
 
+	for(uint8_t i = 0 ; i < NbrChar ; i++)
+	{
+		CpyEntete(&TestEntete[i], &PtrTestEntete[i]);
+	}
+
+	trieEntete(TestEntete, NbrChar);
+
+	for(uint8_t i = 0 ; i < NbrChar ; i++)
+	{
+		printf("case %d : \n\r \t caractère : %c \n\r taille code : %d \n\r code : "BYTE_TO_BINARY_PATTERN"\n\r", i, TestEntete[i].CaractereInicial, TestEntete[i].CodeSize, BYTE_TO_BINARY(TestEntete[i].Code));
+	}
+	printf("---------------------end trieEntete\n\r");
 
 	while(1);
 

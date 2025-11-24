@@ -57,7 +57,7 @@ void creeFeuille(struct noeud** arbre, uint32_t* tab)
 
 
 /**
- * @bref fonction permetant de crée et d'initialier un élément de type noeud
+ * @brief fonction permetant de crée et d'initialier un élément de type noeud
  *
  * @return retourne un pointeur vers l'élément créer
  */
@@ -149,7 +149,7 @@ void CopyNoeud(struct noeud* noeud1, struct noeud* noeud2)
 
 
 /**
- * @bref fonction permetant de réunire les deux dernier élément de l'arbre de huffman
+ * @brief fonction permetant de réunire les deux dernier élément de l'arbre de huffman
  *
  * @param arbre est un tableau de pointeurs vers l'arbre de huffman
  */
@@ -167,7 +167,7 @@ void CreeNoeud(struct noeud** arbre)
 
 
 /**
- * @bref fonction permetant de crée l'arbre de huffman
+ * @brief fonction permetant de crée l'arbre de huffman
  *
  * @param arbre est un tableau de pointeurs vers l'arbre de huffman
  */
@@ -228,7 +228,7 @@ void CreerCode(struct noeud* ptrNoeud, uint32_t code, uint32_t taille)
 }
 
 /**
- * @bref fonction permetant de retourner l'adresse de la structure corespondant au caractère ransaigner
+ * @brief fonction permetant de retourner l'adresse de la structure corespondant au caractère ransaigner
  *
  * @param ptrNoeud est un pointeur vers la racine de l'arbre de huffman
  *
@@ -372,10 +372,11 @@ void FillEntete(T_COMPRESS_CHAR* StructCompress, struct noeud** arbre, uint16_t 
 	uint8_t EnteteStructSize	= sizeof(T_ENTETE);
 	T_ENTETE* CharInfo 			= /*(T_ENTETE*)*/StructCompress->Msg;
 
-	StructCompress->EnteteSize			= 6 + EnteteStructSize * NbrChar;//0x1122;
-	StructCompress->MsgSize				= StructCompress->EnteteSize + StrSize;//0x3344;
+	StructCompress->EnteteSize			= EnteteStructSize * NbrChar;//0x1122;
+	StructCompress->MsgSize				= 6 + StructCompress->EnteteSize + StrSize;//0x3344;
 	StructCompress->NbrCaractereTotal	= StrSize;//0x5566;
 
+	//création de la parti de l'entète permetant le décodage en bougent un pointeur de type T_ENTETE
 	for(uint8_t i = 0 ; i < NbrChar ; i++)
 	{
 		CharInfo[i].CaractereInicial	= arbre[NBR_CARACTERE - i - 1]->c;//0xAA;

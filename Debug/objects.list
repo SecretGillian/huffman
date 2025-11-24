@@ -1,4 +1,5 @@
 "./Src/compretion.o"
+"./Src/decompression.o"
 "./Src/gpio.o"
 "./Src/interrupt.o"
 "./Src/main.o"
