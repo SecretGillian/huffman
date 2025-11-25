@@ -1,17 +1,98 @@
 #include "decompression.h"
 
-void decompress(T_COMPRESS_CHAR* InputBuffer, uint8_t OutputBuffer)
+/**
+ * @brief fonction permetant de décompresser le text ressu
+ *
+ * @param InputBuffer est un pointeur vers la structure contenent le message compresser
+ *
+ * @param OutputBuffer est un pointeur vers le tableau dans le quel nous stockerons le message decompresser
+ *
+ * @return -1 si la fonction n'a pas pue reconnetre un caractère. 0 si non
+ */
+int8_t decompress(T_COMPRESS_CHAR* InputBuffer, uint8_t* OutputBuffer)
 {
-	uint8_t EnteteSize = InputBuffer->EnteteSize / sizeof(T_ENTETE);
+	uint8_t EnteteSize	= InputBuffer->EnteteSize / sizeof(T_ENTETE);
 	T_ENTETE EnteteBuffer[EnteteSize];
-	T_ENTETE* CharInfo = InputBuffer->Msg;
+	T_ENTETE* CharInfo	= InputBuffer->Msg;
+	uint16_t IndexIn	= 0;
+	uint8_t CptBit		= 0;
+	uint16_t InputChar	= 0;
+//	uint8_t OutputBufferTest[TAILLE_MAX_COMPRESS] 		= {0};			//texte decompresser
+
 
 	for(uint8_t i = 0 ; i < EnteteSize ; i++)
 	{
-		EnteteBuffer[i].CaractereInicial = CharInfo[i].CaractereInicial;
-		EnteteBuffer[i].CodeSize = CharInfo[i].CodeSize;
-		EnteteBuffer[i].Code = CharInfo[i].Code;
+		CpyEntete(&EnteteBuffer[i], &CharInfo[i]);
 	}
+
+	trieEntete(EnteteBuffer, EnteteSize);
+
+	for(uint16_t i = 0 ; i < InputBuffer->NbrCaractereTotal ; i ++)
+	{
+		for(uint8_t j = 0 ; j < EnteteSize ; j++)
+		{
+//			if(CptBit < 8)
+//			{
+//				CptBit++;
+//			}else
+//			{
+//				IndexIn++;
+//				CptBit = 0;
+//			}
+//
+//			if
+//			(
+//				((InputBuffer->Msg[InputBuffer->EnteteSize + IndexIn] & (1 << (7 - CptBit)))  !=
+//							0)   ==
+//				((EnteteBuffer[j].Code & (1 << (EnteteBuffer[j].CodeSize - 1 - DECODE_INDICE(j, EnteteSize)))) !=
+//							0)
+//			)
+//			{
+//				OutputBuffer[i] = EnteteBuffer[j].CaractereInicial;
+//				CptBit++;
+//				break;
+//			}
+//
+//			if(j >= EnteteSize - 1)
+//				return -1;
+//
+//			if(j < EnteteSize - 2)
+//				CptBit++;
+
+
+			for(uint8_t k = 0 ; k < EnteteBuffer[j].CodeSize ; k++)
+			{
+				if(InputBuffer->Msg[InputBuffer->EnteteSize + IndexIn] & (1 << (7 - CptBit - k)))
+				{
+					InputChar |= (1 << (EnteteBuffer[j].CodeSize - 1 - k)) ;
+				}else
+				{
+					InputChar &= ~(1 << (EnteteBuffer[j].CodeSize - 1 - k));
+				}
+			}
+
+			if(InputChar == EnteteBuffer[j].Code)
+			{
+				OutputBuffer[i] = EnteteBuffer[j].CaractereInicial;
+
+				if(CptBit + EnteteBuffer[j].CodeSize < 8)
+				{
+					CptBit += EnteteBuffer[j].CodeSize;
+				}else
+				{
+					IndexIn++;
+					CptBit = (CptBit + EnteteBuffer[j].CodeSize) % 8;
+				}
+
+				break;
+			}
+
+			if(j >= EnteteSize - 1)
+				return -1;
+		}
+	}
+
+	return 0;
 }
 
 /**

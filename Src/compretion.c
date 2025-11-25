@@ -372,6 +372,7 @@ void FillEntete(T_COMPRESS_CHAR* StructCompress, struct noeud** arbre, uint16_t 
 	uint8_t EnteteStructSize	= sizeof(T_ENTETE);
 	T_ENTETE* CharInfo 			= /*(T_ENTETE*)*/StructCompress->Msg;
 
+
 	StructCompress->EnteteSize			= EnteteStructSize * NbrChar;//0x1122;
 	StructCompress->MsgSize				= 6 + StructCompress->EnteteSize + StrSize;//0x3344;
 	StructCompress->NbrCaractereTotal	= StrSize;//0x5566;

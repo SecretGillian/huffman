@@ -19,15 +19,18 @@ int main(void)
 	SYSTICK_Init();*/
 	USART2_Init();
 
-	uint8_t texte[] = "aaaabbbccd";								//texte non compressé
-	T_COMPRESS_CHAR texteCompresse = {.texteCompresse = {0}};	//text compressé
-	uint32_t tabCaractere[NBR_CARACTERE] = {0};					//tableau du nombre d'occurrence de chaque caractère
-	//uint32_t nbrCaractereDifferent = 0;						//nombre de caractère différent dans le texte nnon comprésé
-	//uint32_t nbrCaractereDifferent = 0;						//nombre de caractère différent dans le texte nnon comprésé
-	//uint32_t nbrCaractereTotal = 0;							//nombre de caractère totale dans le texte non compressé
-	struct noeud* arbreHuffman[NBR_CARACTERE] = {NULL};			//arbre de huffman
-	uint32_t code = 0;
-	uint32_t taille = 0;
+	uint8_t texte[] 									= "aaaabbbccd";	//texte non compressé
+	T_COMPRESS_CHAR texteCompresse = {.texteCompresse	= {0}};			//texte compressé
+	uint32_t tabCaractere[NBR_CARACTERE] 				= {0};			//tableau du nombre d'occurrence de chaque caractère
+	//uint32_t nbrCaractereDifferent = 0;								//nombre de caractère différent dans le texte nnon comprésé
+	//uint32_t nbrCaractereDifferent = 0;								//nombre de caractère différent dans le texte nnon comprésé
+	//uint32_t nbrCaractereTotal = 0;									//nombre de caractère totale dans le texte non compressé
+	struct noeud* arbreHuffman[NBR_CARACTERE] 			= {NULL};		//arbre de huffman
+	//variable permetant de
+	uint32_t code 										= 0;
+	uint32_t taille 									= 0;
+	uint8_t TextDecompress[TAILLE_MAX_COMPRESS] 		= {0};			//texte decompresser
+	int8_t ValReturn 									= 0;			//valeur de retour de la fonction de décompression
 
 	printf("------------------------------------------start occurence\n\r");
 	occurence(texte, tabCaractere);
@@ -107,7 +110,7 @@ int main(void)
 
 	printf("\n\n\n");
 
-	for(uint16_t i = 0 ; i < TAILLE_MAX_COMPRESS ; i++)
+	for(uint16_t i = 0 ; i < TAILLE_MAX_COMPRESS / 2 ; i++)
 	{
 		printf("%d : "BYTE_TO_BINARY_PATTERN" | %02X \n\r", i, BYTE_TO_BINARY(texteCompresse.texteCompresse[i]), texteCompresse.texteCompresse[i]);
 	}
@@ -132,6 +135,18 @@ int main(void)
 		printf("case %d : \n\r \t caractère : %c \n\r taille code : %d \n\r code : "BYTE_TO_BINARY_PATTERN"\n\r", i, TestEntete[i].CaractereInicial, TestEntete[i].CodeSize, BYTE_TO_BINARY(TestEntete[i].Code));
 	}
 	printf("---------------------end trieEntete\n\r");
+
+	printf("\n\n\n");
+
+	printf("---------------------start decompress\n\r");
+	ValReturn = decompress(&texteCompresse, TextDecompress);
+
+	printf("test fonction : %i \n\r", ValReturn);
+//	for(uint16_t i = 0 ; i < TAILLE_MAX_COMPRESS / 2 ; i++)
+//	{
+//		printf("c : %02X \n\r", TextDecompress[i]);
+//	}
+	printf("%s \n\r", TextDecompress);
 
 	while(1);
 
